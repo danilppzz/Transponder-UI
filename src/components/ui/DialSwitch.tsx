@@ -37,6 +37,7 @@ const DialSwitch: React.FC<DialSwitchProps> = ({ onChange }) => {
           const rotate = initialAngle + (step * index); // Ajuste del ángulo para los botones
           return (
             <button
+            title={`Switch to ${mode}`}
               key={mode}
               className={styles.button}
               style={{
