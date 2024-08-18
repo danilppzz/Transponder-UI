@@ -39,7 +39,7 @@ const Transponder = () => {
     setActive(true);
     setTimeout(() => {
       setActive(false);
-    }, 1000);
+    }, 1200);
   };
 
   const increment = (index: number) => {
@@ -60,8 +60,7 @@ const Transponder = () => {
 
   const handleShowInfo = () => {
     const message = `Current Mode: ${currentMode}\n` +
-                    `Active: ${active}\n` +
-                    `Code: ${numbers.join(", ")}\n` +
+                    `Code: ${numbers.join("")}\n` +
                     `Brightness: ${brightness}`;
     alert(message);
   };
@@ -70,19 +69,19 @@ const Transponder = () => {
     <div className="relative flex bg-[#0e0e0e] text-white h-[200px] border-white/20 border w-[800px] rounded-xl py-2 px-3">
       <div className="flex space-x-[60px]">
         <DialSwitch onChange={handleModeChange} />
-        <div className="flex flex-col space-y-10 mt-[40px]">
+        <div className="flex flex-col space-y-10 mt-[40px] w-auto">
           <div
-            className={`${
-              active ? "bg-orange-400/35" : "bg-black"
-            } h-8 w-8 rounded-full border border-white/20 flex items-center justify-center transition-all ease-in-out duration-200`}
+            className={`px-1 w-full ${
+              active ? "bg-yellow-400/35" : "bg-black"
+            } ${currentMode.startsWith("TST") ? "bg-green-400/35" : "bg-black"} ${currentMode.startsWith("ON")||currentMode.startsWith("ALT")? "bg-yellow-400/35" : "bg-black"} h-8 w-8 rounded-xl border border-white/20 flex items-center justify-center transition-all ease-in-out duration-200`}
           >
             <span
-              className={`${active ? "bg-orange-400/55" : "bg-black"} h-5 w-5 rounded-full`}
+              className={`w-full ${currentMode.startsWith("TST") ? "bg-green-400/55" : "bg-black"} ${active ? "bg-yellow-400/55" : "bg-black"} ${currentMode.startsWith("ON")||currentMode.startsWith("ALT")? "bg-yellow-400/55" : "bg-black"} h-5 w-5 rounded-lg`}
             ></span>
           </div>
           <button
             onClick={() => {
-              handleActive();
+              handleShowInfo();
             }}
             className={styles.identbutton}
           >
@@ -118,14 +117,13 @@ const Transponder = () => {
         </div>
         <div
           ref={brightnessContainerRef}
-          className="absolute top-[6px] left-[713px] flex flex-col items-center p-2 bg-black rounded-lg border border-white/20 cursor-pointer"
+          className="absolute top-[6px] left-[713px] flex flex-col items-center hover:bg-black/20 p-2 bg-black rounded-lg border border-white/20 cursor-pointer"
         ></div>
       </div>
       <div className="absolute bottom-0 left-0 w-auto py-1 px-2 bg-transparent border-t border-r border-t-white/20 border-r-white/20 overflow-hidden rounded-tr-xl">
         <h2
           className="text-white/70 text-[14px] font-mono font-medium select-none"
           id="label"
-          onClick={() => {handleShowInfo()}}
         >
           NavLink T-300
         </h2>
