@@ -8,6 +8,10 @@
   background-size: cover;
 }
 
+.backgroundpage {
+  background-image: url("/output_1.jpg");
+}
+
 /* From Uiverse.io by elijahgummer */ 
 .switch {
     position: relative;
